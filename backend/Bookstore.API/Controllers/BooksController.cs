@@ -12,7 +12,8 @@ public class BooksController(BookstoreDbContext context) : ControllerBase
     public async Task<IActionResult> GetBooks(
         int pageSize = 5,
         int pageNumber = 1,
-        string sortOrder = "asc"
+        string sortOrder = "asc",
+        string? category = null
     )
     {
         if (pageSize <= 0)
@@ -27,10 +28,16 @@ public class BooksController(BookstoreDbContext context) : ControllerBase
 
         IQueryable<Book> query = context.Books.AsNoTracking();
 
+        if (!string.IsNullOrWhiteSpace(category))
+        {
+            query = query.Where(b => b.Category == category);
+        }
+
         query = sortOrder.ToLower() == "desc"
             ? query.OrderByDescending(b => b.Title)
             : query.OrderBy(b => b.Title);
 
+        // Count after filtering so pagination matches the selected category.
         var totalNumBooks = await query.CountAsync();
 
         var books = await query
@@ -39,5 +46,17 @@ public class BooksController(BookstoreDbContext context) : ControllerBase
             .ToListAsync();
 
         return Ok(new { Books = books, TotalNumBooks = totalNumBooks });
+    }
+
+    [HttpGet("categories")]
+    public async Task<IActionResult> GetCategories()
+    {
+        var categories = await context.Books.AsNoTracking()
+            .Select(b => b.Category)
+            .Distinct()
+            .OrderBy(c => c)
+            .ToListAsync();
+
+        return Ok(categories);
     }
 }

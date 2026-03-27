@@ -1,21 +1,21 @@
 {
   "version": 2,
-  "dgSpecHash": "ISIlobQIEF4=",
+  "dgSpecHash": "25iQWWgLOYM=",
   "success": true,
-  "projectFilePath": "/Users/gswoolley/Desktop/Mission11Assignment/backend/Bookstore.API/Bookstore.API.csproj",
+  "projectFilePath": "/Users/gswoolley/Desktop/Mission12Assignment/backend/Bookstore.API/Bookstore.API.csproj",
   "expectedPackageFiles": [
-    "/Users/gswoolley/.nuget/packages/microsoft.data.sqlite.core/10.0.1/microsoft.data.sqlite.core.10.0.1.nupkg.sha512",
-    "/Users/gswoolley/.nuget/packages/microsoft.entityframeworkcore/10.0.1/microsoft.entityframeworkcore.10.0.1.nupkg.sha512",
-    "/Users/gswoolley/.nuget/packages/microsoft.entityframeworkcore.abstractions/10.0.1/microsoft.entityframeworkcore.abstractions.10.0.1.nupkg.sha512",
-    "/Users/gswoolley/.nuget/packages/microsoft.entityframeworkcore.analyzers/10.0.1/microsoft.entityframeworkcore.analyzers.10.0.1.nupkg.sha512",
-    "/Users/gswoolley/.nuget/packages/microsoft.entityframeworkcore.relational/10.0.1/microsoft.entityframeworkcore.relational.10.0.1.nupkg.sha512",
-    "/Users/gswoolley/.nuget/packages/microsoft.entityframeworkcore.sqlite/10.0.1/microsoft.entityframeworkcore.sqlite.10.0.1.nupkg.sha512",
-    "/Users/gswoolley/.nuget/packages/microsoft.entityframeworkcore.sqlite.core/10.0.1/microsoft.entityframeworkcore.sqlite.core.10.0.1.nupkg.sha512",
-    "/Users/gswoolley/.nuget/packages/microsoft.extensions.dependencymodel/10.0.1/microsoft.extensions.dependencymodel.10.0.1.nupkg.sha512",
-    "/Users/gswoolley/.nuget/packages/sqlitepclraw.bundle_e_sqlite3/2.1.11/sqlitepclraw.bundle_e_sqlite3.2.1.11.nupkg.sha512",
-    "/Users/gswoolley/.nuget/packages/sqlitepclraw.core/2.1.11/sqlitepclraw.core.2.1.11.nupkg.sha512",
-    "/Users/gswoolley/.nuget/packages/sqlitepclraw.lib.e_sqlite3/2.1.11/sqlitepclraw.lib.e_sqlite3.2.1.11.nupkg.sha512",
-    "/Users/gswoolley/.nuget/packages/sqlitepclraw.provider.e_sqlite3/2.1.11/sqlitepclraw.provider.e_sqlite3.2.1.11.nupkg.sha512"
+    "/var/folders/08/5fn91ysd4gv7h6b2pjfq8jl40000gn/T/cursor-sandbox-cache/feec1863ad79f0352cc744baebe0b3b5/nuget/microsoft.data.sqlite.core/10.0.1/microsoft.data.sqlite.core.10.0.1.nupkg.sha512",
+    "/var/folders/08/5fn91ysd4gv7h6b2pjfq8jl40000gn/T/cursor-sandbox-cache/feec1863ad79f0352cc744baebe0b3b5/nuget/microsoft.entityframeworkcore/10.0.1/microsoft.entityframeworkcore.10.0.1.nupkg.sha512",
+    "/var/folders/08/5fn91ysd4gv7h6b2pjfq8jl40000gn/T/cursor-sandbox-cache/feec1863ad79f0352cc744baebe0b3b5/nuget/microsoft.entityframeworkcore.abstractions/10.0.1/microsoft.entityframeworkcore.abstractions.10.0.1.nupkg.sha512",
+    "/var/folders/08/5fn91ysd4gv7h6b2pjfq8jl40000gn/T/cursor-sandbox-cache/feec1863ad79f0352cc744baebe0b3b5/nuget/microsoft.entityframeworkcore.analyzers/10.0.1/microsoft.entityframeworkcore.analyzers.10.0.1.nupkg.sha512",
+    "/var/folders/08/5fn91ysd4gv7h6b2pjfq8jl40000gn/T/cursor-sandbox-cache/feec1863ad79f0352cc744baebe0b3b5/nuget/microsoft.entityframeworkcore.relational/10.0.1/microsoft.entityframeworkcore.relational.10.0.1.nupkg.sha512",
+    "/var/folders/08/5fn91ysd4gv7h6b2pjfq8jl40000gn/T/cursor-sandbox-cache/feec1863ad79f0352cc744baebe0b3b5/nuget/microsoft.entityframeworkcore.sqlite/10.0.1/microsoft.entityframeworkcore.sqlite.10.0.1.nupkg.sha512",
+    "/var/folders/08/5fn91ysd4gv7h6b2pjfq8jl40000gn/T/cursor-sandbox-cache/feec1863ad79f0352cc744baebe0b3b5/nuget/microsoft.entityframeworkcore.sqlite.core/10.0.1/microsoft.entityframeworkcore.sqlite.core.10.0.1.nupkg.sha512",
+    "/var/folders/08/5fn91ysd4gv7h6b2pjfq8jl40000gn/T/cursor-sandbox-cache/feec1863ad79f0352cc744baebe0b3b5/nuget/microsoft.extensions.dependencymodel/10.0.1/microsoft.extensions.dependencymodel.10.0.1.nupkg.sha512",
+    "/var/folders/08/5fn91ysd4gv7h6b2pjfq8jl40000gn/T/cursor-sandbox-cache/feec1863ad79f0352cc744baebe0b3b5/nuget/sqlitepclraw.bundle_e_sqlite3/2.1.11/sqlitepclraw.bundle_e_sqlite3.2.1.11.nupkg.sha512",
+    "/var/folders/08/5fn91ysd4gv7h6b2pjfq8jl40000gn/T/cursor-sandbox-cache/feec1863ad79f0352cc744baebe0b3b5/nuget/sqlitepclraw.core/2.1.11/sqlitepclraw.core.2.1.11.nupkg.sha512",
+    "/var/folders/08/5fn91ysd4gv7h6b2pjfq8jl40000gn/T/cursor-sandbox-cache/feec1863ad79f0352cc744baebe0b3b5/nuget/sqlitepclraw.lib.e_sqlite3/2.1.11/sqlitepclraw.lib.e_sqlite3.2.1.11.nupkg.sha512",
+    "/var/folders/08/5fn91ysd4gv7h6b2pjfq8jl40000gn/T/cursor-sandbox-cache/feec1863ad79f0352cc744baebe0b3b5/nuget/sqlitepclraw.provider.e_sqlite3/2.1.11/sqlitepclraw.provider.e_sqlite3.2.1.11.nupkg.sha512"
   ],
   "logs": []
 }

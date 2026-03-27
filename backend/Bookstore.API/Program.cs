@@ -19,7 +19,8 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowVite", policy =>
     {
-        policy.WithOrigins("http://localhost:3002")
+        policy
+            .WithOrigins("http://localhost:3002", "http://127.0.0.1:3002")
             .AllowAnyHeader()
             .AllowAnyMethod();
     });

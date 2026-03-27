@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/gswoolley/Desktop/Mission11Assignment/backend/Bookstore.API/Bookstore.API.csproj": {}
+    "/Users/gswoolley/Desktop/Mission12Assignment/backend/Bookstore.API/Bookstore.API.csproj": {}
   },
   "projects": {
-    "/Users/gswoolley/Desktop/Mission11Assignment/backend/Bookstore.API/Bookstore.API.csproj": {
+    "/Users/gswoolley/Desktop/Mission12Assignment/backend/Bookstore.API/Bookstore.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/gswoolley/Desktop/Mission11Assignment/backend/Bookstore.API/Bookstore.API.csproj",
+        "projectUniqueName": "/Users/gswoolley/Desktop/Mission12Assignment/backend/Bookstore.API/Bookstore.API.csproj",
         "projectName": "Bookstore.API",
-        "projectPath": "/Users/gswoolley/Desktop/Mission11Assignment/backend/Bookstore.API/Bookstore.API.csproj",
-        "packagesPath": "/Users/gswoolley/.nuget/packages/",
-        "outputPath": "/Users/gswoolley/Desktop/Mission11Assignment/backend/Bookstore.API/obj/",
+        "projectPath": "/Users/gswoolley/Desktop/Mission12Assignment/backend/Bookstore.API/Bookstore.API.csproj",
+        "packagesPath": "/var/folders/08/5fn91ysd4gv7h6b2pjfq8jl40000gn/T/cursor-sandbox-cache/feec1863ad79f0352cc744baebe0b3b5/nuget",
+        "outputPath": "/Users/gswoolley/Desktop/Mission12Assignment/backend/Bookstore.API/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/gswoolley/.nuget/NuGet/NuGet.Config"
