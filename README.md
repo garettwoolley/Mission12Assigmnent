@@ -1,6 +1,8 @@
-# Mission 12 Bookstore
+# Bookstore (Missions 12–13)
 
-This project is a full-stack bookstore app built for the Mission 12 assignment. It uses the provided `Bookstore.sqlite` database, an ASP.NET Core API backend, and a React + Vite frontend.
+This project is a full-stack bookstore app built for IS 413. It uses the provided `Bookstore.sqlite` database, an ASP.NET Core API backend, and a React + Vite frontend.
+
+**Phase 6 / Mission 13** work (admin CRUD, Azure prep) should live on the `mission13` branch.
 
 ## Project Structure
 
@@ -35,6 +37,9 @@ Mission12Assignment/
 - Session-persistent cart and browse state
 - Continue Shopping flow from cart back to main list
 - Bootstrap styling
+- **Mission 13:** Admin page at `/adminbooks` to **add, edit, and delete** books in the database
+- **Mission 13:** `public/routes.json` for Azure Static Web Apps SPA fallback (deep links like `/adminbooks`)
+- **Mission 13:** Configurable API URL via `VITE_API_URL` for production builds (see below)
 
 ## Requirements
 
@@ -71,6 +76,12 @@ curl "http://localhost:5003/api/books/categories"
 curl "http://localhost:5003/api/books?pageSize=5&pageNumber=1&sortOrder=asc&category=Biography"
 ```
 
+Admin / CRUD endpoints (Mission 13):
+
+```bash
+curl "http://localhost:5003/api/books/all"
+```
+
 ### Run the Frontend
 
 In a second terminal, from the project root:
@@ -102,6 +113,30 @@ dotnet build
 cd frontend
 npm run build
 ```
+
+### Production API URL (Mission 13)
+
+For a hosted frontend, set the API base URL when building:
+
+```bash
+cd frontend
+echo "VITE_API_URL=https://your-api-host.example" > .env.production
+npm run build
+```
+
+See [`frontend/.env.example`](frontend/.env.example). The app defaults to `http://localhost:5003` when unset.
+
+### Azure deployment (Mission 13 — manual steps)
+
+Deployment is done in the Azure portal / your course videos. Typical checklist:
+
+1. **API:** Publish the ASP.NET Core app (e.g. Azure App Service). Set `ASPNETCORE_ENVIRONMENT` to `Production` if you use production settings.
+2. **Database:** Follow instructor guidance for SQLite vs Azure SQL on the server. The repo uses SQLite locally; cloud hosting may require a different connection string in Azure **Application settings** / `ConnectionStrings__BookstoreConnection`.
+3. **CORS:** Add your **deployed frontend origin** (exact URL, including `https://`) to `Cors:AllowedOrigins` in [`backend/Bookstore.API/appsettings.Production.json`](backend/Bookstore.API/appsettings.Production.json), or override via configuration in Azure. Local dev origins remain in [`backend/Bookstore.API/appsettings.json`](backend/Bookstore.API/appsettings.json).
+4. **Frontend:** Deploy the contents of `frontend/dist` (e.g. Azure Static Web Apps). Ensure `routes.json` is present at the site root (Vite copies it from [`frontend/public/routes.json`](frontend/public/routes.json)).
+5. **Verify:** Open `https://<your-frontend>/adminbooks` in a **new tab** (deep link). The page must load (SPA fallback). Submit the **live site URL** in Learning Suite (or your GitHub repo link if not deployed).
+
+**Deployed site URL (paste for Learning Suite):** `https://YOUR-FRONTEND-HERE`
 
 ## Mission 12 Rubric Coverage
 
@@ -139,9 +174,10 @@ Two Bootstrap features not covered in class videos that I added are:
 
 - The backend is configured to use the provided `Bookstore.sqlite` file in the project root.
 - Local development is set up over HTTP to avoid local HTTPS certificate issues.
-- CORS allows both `http://localhost:3002` and `http://127.0.0.1:3002` so either URL works with Vite.
+- CORS allowed origins are listed under `Cors:AllowedOrigins` in `appsettings.json` (localhost / 127.0.0.1). Add your Azure frontend URL for production.
+- The storefront and admin UI call the API using [`frontend/src/config/apiBaseUrl.ts`](frontend/src/config/apiBaseUrl.ts).
 - If `localhost:3002` or `localhost:5003` is already in use, the ports will need to be updated in:
   - `frontend/vite.config.ts`
-  - `frontend/src/components/BookList.tsx`
-  - `backend/Bookstore.API/Program.cs`
+  - `frontend/src/config/apiBaseUrl.ts` (or `.env` / `VITE_API_URL`)
+  - `backend/Bookstore.API/appsettings.json` (`Cors:AllowedOrigins`)
   - `backend/Bookstore.API/Properties/launchSettings.json`

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import type { Book } from '../types/book'
 import { useCart } from '../context/CartContext'
+import { apiBaseUrl } from '../config/apiBaseUrl'
 
 type SortOrder = 'asc' | 'desc'
 
@@ -17,8 +18,8 @@ interface BrowseState {
   category: string
 }
 
-const apiUrl = 'http://localhost:5003/api/books'
-const categoriesUrl = 'http://localhost:5003/api/books/categories'
+const apiUrl = `${apiBaseUrl}/api/books`
+const categoriesUrl = `${apiBaseUrl}/api/books/categories`
 // Restored on mount so "Continue Shopping" returns to the same category/page/sort.
 const browseStateKey = 'bookstore-browse-state'
 
@@ -165,14 +166,19 @@ function BookList() {
       <div className="container py-4 py-md-5">
         <div className="mb-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
           <h1 className="mb-2">Online Bookstore</h1>
-          <Link to="/cart" className="btn btn-outline-dark position-relative">
-            Go To Cart
-            {totalQuantity > 0 && (
-              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                {totalQuantity}
-              </span>
-            )}
-          </Link>
+          <div className="d-flex flex-wrap gap-2">
+            <Link to="/adminbooks" className="btn btn-outline-secondary">
+              Admin books
+            </Link>
+            <Link to="/cart" className="btn btn-outline-dark position-relative">
+              Go To Cart
+              {totalQuantity > 0 && (
+                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  {totalQuantity}
+                </span>
+              )}
+            </Link>
+          </div>
         </div>
 
         <div className="row g-4">

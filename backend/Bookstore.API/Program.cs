@@ -15,14 +15,21 @@ builder.Services.AddDbContext<BookstoreDbContext>(options =>
     options.UseSqlite($"Data Source={databasePath}")
 );
 
+var corsOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>()
+    ?? Array.Empty<string>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowVite", policy =>
     {
-        policy
-            .WithOrigins("http://localhost:3002", "http://127.0.0.1:3002")
-            .AllowAnyHeader()
-            .AllowAnyMethod();
+        if (corsOrigins.Length > 0)
+        {
+            policy.WithOrigins(corsOrigins).AllowAnyHeader().AllowAnyMethod();
+        }
+        else
+        {
+            policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+        }
     });
 });
 
