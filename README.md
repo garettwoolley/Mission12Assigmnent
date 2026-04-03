@@ -175,9 +175,9 @@ Two Bootstrap features not covered in class videos that I added are:
 - The backend uses `Bookstore.sqlite` in [`backend/Bookstore.API/`](backend/Bookstore.API/); the `.csproj` copies it to the build/publish output (`PreserveNewest`) for local runs and Azure.
 - Local development is set up over HTTP to avoid local HTTPS certificate issues.
 - CORS allowed origins are listed under `Cors:AllowedOrigins` in `appsettings.json` (localhost / 127.0.0.1). Add your Azure frontend URL for production.
-- The storefront and admin UI call the API using [`frontend/src/config/apiBaseUrl.ts`](frontend/src/config/apiBaseUrl.ts).
+- The storefront and admin UI call the API through [`frontend/src/api/BooksAPI.ts`](frontend/src/api/BooksAPI.ts): `VITE_API_URL` if set, otherwise `http://localhost:5003` in dev, otherwise the deployed API at `https://bookstore-project-fphpd6asdhabhje3.francecentral-01.azurewebsites.net`.
 - If `localhost:3002` or `localhost:5003` is already in use, the ports will need to be updated in:
   - `frontend/vite.config.ts`
-  - `frontend/src/config/apiBaseUrl.ts` (or `.env` / `VITE_API_URL`)
+  - `frontend/src/api/BooksAPI.ts` (`LOCAL_API_BASE`) or `.env` / `VITE_API_URL`
   - `backend/Bookstore.API/appsettings.json` (`Cors:AllowedOrigins`)
   - `backend/Bookstore.API/Properties/launchSettings.json`

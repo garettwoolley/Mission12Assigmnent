@@ -1,9 +1,7 @@
 import { type FormEvent, useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { apiBaseUrl } from '../config/apiBaseUrl'
+import { createBook, deleteBook, fetchAllBooks, updateBook } from '../api/BooksAPI'
 import type { Book } from '../types/book'
-
-const booksAllUrl = `${apiBaseUrl}/api/books/all`
 
 type FormState = {
   title: string
@@ -51,11 +49,7 @@ function AdminBooksPage() {
     try {
       setIsLoading(true)
       setError('')
-      const response = await fetch(booksAllUrl)
-      if (!response.ok) {
-        throw new Error('Failed to load books.')
-      }
-      const data = (await response.json()) as Book[]
+      const data = await fetchAllBooks()
       setBooks(data)
     } catch {
       setError('Unable to load books. Check that the API is running and CORS allows this origin.')
@@ -142,25 +136,9 @@ function AdminBooksPage() {
     try {
       setIsLoading(true)
       if (editingId === null) {
-        const response = await fetch(`${apiBaseUrl}/api/books`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body),
-        })
-        if (!response.ok) {
-          const message = await response.text()
-          throw new Error(message || 'Create failed.')
-        }
+        await createBook(body)
       } else {
-        const response = await fetch(`${apiBaseUrl}/api/books/${editingId}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body),
-        })
-        if (!response.ok) {
-          const message = await response.text()
-          throw new Error(message || 'Update failed.')
-        }
+        await updateBook(editingId, body)
       }
 
       cancelEdit()
@@ -180,13 +158,12 @@ function AdminBooksPage() {
     try {
       setIsLoading(true)
       setError('')
-      const response = await fetch(`${apiBaseUrl}/api/books/${bookID}`, {
-        method: 'DELETE',
-      })
-      if (response.status === 404) {
+      const result = await deleteBook(bookID)
+      if (result === 'not_found') {
         setError('Book was not found (it may have been deleted already).')
-      } else if (!response.ok) {
-        throw new Error('Delete failed.')
+      } else if (result === 'failed') {
+        setError('Delete failed.')
+        return
       }
 
       if (editingId === bookID) {

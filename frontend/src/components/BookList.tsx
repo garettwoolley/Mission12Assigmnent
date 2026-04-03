@@ -1,15 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import type { Book } from '../types/book'
+import { fetchBookCategories, fetchBooks } from '../api/BooksAPI'
 import { useCart } from '../context/CartContext'
-import { apiBaseUrl } from '../config/apiBaseUrl'
 
 type SortOrder = 'asc' | 'desc'
-
-interface BooksResponse {
-  books: Book[]
-  totalNumBooks: number
-}
 
 interface BrowseState {
   pageSize: number
@@ -18,8 +13,6 @@ interface BrowseState {
   category: string
 }
 
-const apiUrl = `${apiBaseUrl}/api/books`
-const categoriesUrl = `${apiBaseUrl}/api/books/categories`
 // Restored on mount so "Continue Shopping" returns to the same category/page/sort.
 const browseStateKey = 'bookstore-browse-state'
 
@@ -64,14 +57,9 @@ function BookList() {
   useEffect(() => {
     const controller = new AbortController()
 
-    const fetchCategories = async () => {
+    const loadCategories = async () => {
       try {
-        const response = await fetch(categoriesUrl, { signal: controller.signal })
-        if (!response.ok) {
-          throw new Error('Unable to load categories.')
-        }
-
-        const data = (await response.json()) as string[]
+        const data = await fetchBookCategories(controller.signal)
         setCategories(data)
       } catch (err) {
         if (err instanceof Error && err.name === 'AbortError') {
@@ -81,7 +69,7 @@ function BookList() {
       }
     }
 
-    fetchCategories()
+    loadCategories()
     return () => controller.abort()
   }, [])
 
@@ -93,30 +81,15 @@ function BookList() {
   useEffect(() => {
     const controller = new AbortController()
 
-    const fetchBooks = async () => {
+    const loadBooks = async () => {
       try {
         setIsLoading(true)
         setError('')
 
-        const query = new URLSearchParams({
-          pageSize: String(pageSize),
-          pageNumber: String(pageNumber),
-          sortOrder,
-        })
-
-        if (category) {
-          query.set('category', category)
-        }
-
-        const response = await fetch(`${apiUrl}?${query.toString()}`, {
+        const data = await fetchBooks(pageSize, pageNumber, sortOrder, {
+          category: category || undefined,
           signal: controller.signal,
         })
-
-        if (!response.ok) {
-          throw new Error('Unable to load books from the API.')
-        }
-
-        const data: BooksResponse = await response.json()
         setBooks(data.books)
         setTotalItems(data.totalNumBooks)
       } catch (err) {
@@ -130,7 +103,7 @@ function BookList() {
       }
     }
 
-    fetchBooks()
+    loadBooks()
 
     return () => controller.abort()
   }, [category, pageNumber, pageSize, sortOrder])
