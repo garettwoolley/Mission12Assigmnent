@@ -10,8 +10,8 @@ This project is a full-stack bookstore app built for IS 413. It uses the provide
 Mission12Assignment/
 ├── backend/
 │   └── Bookstore.API/
+│       └── Bookstore.sqlite
 ├── frontend/
-├── Bookstore.sqlite
 └── WaterProject copy/
 ```
 
@@ -172,7 +172,7 @@ Two Bootstrap features not covered in class videos that I added are:
 
 ## Notes
 
-- The backend is configured to use the provided `Bookstore.sqlite` file in the project root.
+- The backend uses `Bookstore.sqlite` in [`backend/Bookstore.API/`](backend/Bookstore.API/); the `.csproj` copies it to the build/publish output (`PreserveNewest`) for local runs and Azure.
 - Local development is set up over HTTP to avoid local HTTPS certificate issues.
 - CORS allowed origins are listed under `Cors:AllowedOrigins` in `appsettings.json` (localhost / 127.0.0.1). Add your Azure frontend URL for production.
 - The storefront and admin UI call the API using [`frontend/src/config/apiBaseUrl.ts`](frontend/src/config/apiBaseUrl.ts).

@@ -7,9 +7,8 @@ builder.Services.AddControllers();
 
 var databaseFileName =
     builder.Configuration.GetConnectionString("BookstoreConnection") ?? "Bookstore.sqlite";
-var databasePath = Path.GetFullPath(
-    Path.Combine(builder.Environment.ContentRootPath, "..", "..", databaseFileName)
-);
+// Bookstore.sqlite is in this project and copied to build/publish output (PreserveNewest = copy if newer).
+var databasePath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, databaseFileName));
 
 builder.Services.AddDbContext<BookstoreDbContext>(options =>
     options.UseSqlite($"Data Source={databasePath}")
